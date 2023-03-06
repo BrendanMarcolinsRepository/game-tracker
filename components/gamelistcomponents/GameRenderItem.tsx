@@ -9,6 +9,9 @@ import {
     TouchableOpacity,
   } from 'react-native';
 
+import { useState } from 'react';
+
+
 import GameItem from './GameItem';
 
 
@@ -25,18 +28,29 @@ import GameItem from './GameItem';
     item: ItemData;
     selectedId : string | undefined,
     setSelectedId : (id : string) => void
+    onPressHandler : (id : any) => any
   };
   
-function GameRenderItem ({item, selectedId, setSelectedId} : ItemProps)  {
+function GameRenderItem ({item, selectedId, setSelectedId, onPressHandler} : ItemProps)  {
 
     const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
     const color = item.id === selectedId ? 'white' : 'black';
 
+    function update(id : string){
+      console.log("wokring here")
+      onPressHandler(id)
+      setSelectedId(id)
+      
+    }
+
     return (
         <View>
+
+            
+
             <GameItem
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => update(item.id)}
                 backgroundColor={backgroundColor}
                 textColor={color}
             />
